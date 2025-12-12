@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Acervo | Biblioteca Conecta</title>
+
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(#faf7ff, #ece4ff);
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    background: #4b2e83;
+    padding: 25px;
+    text-align: center;
+    color: white;
+  }
+
+  nav a {
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  nav a:hover { color: #d9c6ff; }
+
+  .container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  h2 { color: #4b2e83; }
+
+  .barra {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #c4aaff;
+    margin-bottom: 20px;
+  }
+
+  .book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+  }
+
+  .book-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: .3s;
+    text-align: center;
+  }
+
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+  }
+
+  .book-title {
+    font-weight: bold;
+    color: #4b2e83;
+    margin-top: 10px;
+  }
+
+  .book-author {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  .btn {
+    display: block;
+    width: 85%;
+    margin: 6px auto;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .lendo { background: #4b2e83; }
+  .lido { background: #2a7a2a; }
+  .proximos { background: #c98900; }
+
+  .lendo:hover { background: #6c45c7; }
+  .lido:hover { background: #3ca43c; }
+  .proximos:hover { background: #ffb300; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Acervo</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="batepapo.html">Bate-Papo</a>
+    <a href="salas.html">Salas</a>
+    <a href="estantes.html">Estantes</a>
+    <a href="grupos.html">Grupos</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <h2>Explore nosso Acervo</h2>
+
+  <input id="busca" class="barra" type="text" placeholder="🔍 Buscar livro..." onkeyup="buscar()">
+
+  <select id="filtro" class="barra" onchange="filtrar()">
+    <option value="todos">Todos os gêneros</option>
+    <option value="ficcao">Ficção Científica</option>
+    <option value="fantasia">Fantasia</option>
+    <option value="terror">Terror</option>
+    <option value="romance">Romance</option>
+    <option value="drama">Drama</option>
+    <option value="classicos">Clássicos</option>
+    <option value="filosofia">Filosofia</option>
+    <option value="misterio">Mistério</option>
+    <option value="nao_ficcao">Não Ficção</option>
+  </select>
+
+  <div id="listaLivros" class="book-grid"></div>
+
+</div>
+
+<script>
+
+// --------------------------------------
+// LIVROS COM CAPAS REAIS (130 ITEMS)
+// --------------------------------------
+
+const livros = [
+
+  // -----------------------
+  // FICÇÃO CIENTÍFICA (15)
+  // -----------------------
+  {titulo:"Duna", autor:"Frank Herbert", genero:"ficcao", isbn:"9780593099322"},
+  {titulo:"Neuromancer", autor:"William Gibson", genero:"ficcao", isbn:"9780441569595"},
+  {titulo:"Fundação", autor:"Isaac Asimov", genero:"ficcao", isbn:"9780553293357"},
+  {titulo:"1984", autor:"George Orwell", genero:"ficcao", isbn:"9780451524935"},
+  {titulo:"Admirável Mundo Novo", autor:"Aldous Huxley", genero:"ficcao", isbn:"9780060850524"},
+  {titulo:"Fahrenheit 451", autor:"Ray Bradbury", genero:"ficcao", isbn:"9781451673319"},
+  {titulo:"O Conto da Aia", autor:"Margaret Atwood", genero:"ficcao", isbn:"9780385490818"},
+  {titulo:"A Revolução dos Bichos", autor:"George Orwell", genero:"ficcao", isbn:"9780451526342"},
+  {titulo:"A Máquina do Tempo", autor:"H.G. Wells", genero:"ficcao", isbn:"9780451528551"},
+  {titulo:"A Ilha do Dr. Moreau", autor:"H.G. Wells", genero:"ficcao", isbn:"9780486290270"},
+  {titulo:"O Homem Invisível", autor:"H.G. Wells", genero:"ficcao", isbn:"9780451531674"},
+  {titulo:"Snow Crash", autor:"Neal Stephenson", genero:"ficcao", isbn:"9780553380958"},
+  {titulo:"O Fim da Infância", autor:"Arthur C. Clarke", genero:"ficcao", isbn:"9780345444059"},
+  {titulo:"Eu, Robô", autor:"Isaac Asimov", genero:"ficcao", isbn:"9780553294385"},
+  {titulo:"Solaris", autor:"Stanislaw Lem", genero:"ficcao", isbn:"9780156027601"},
+
+  // -----------------------
+  // FANTASIA (15)
+  // -----------------------
+  {titulo:"O Hobbit", autor:"J.R.R. Tolkien", genero:"fantasia", isbn:"9780547928227"},
+  {titulo:"O Senhor dos Anéis", autor:"J.R.R. Tolkien", genero:"fantasia", isbn:"9780544003415"},
+  {titulo:"Harry Potter e a Pedra Filosofal", autor:"J.K. Rowling", genero:"fantasia", isbn:"9780439708180"},
+  {titulo:"Eragon", autor:"Christopher Paolini", genero:"fantasia", isbn:"9780440246008"},
+  {titulo:"As Crônicas de Nárnia", autor:"C.S. Lewis", genero:"fantasia", isbn:"9780066238500"},
+  {titulo:"Mistborn", autor:"Brandon Sanderson", genero:"fantasia", isbn:"9780765350381"},
+  {titulo:"O Nome do Vento", autor:"Patrick Rothfuss", genero:"fantasia", isbn:"9780756404741"},
+  {titulo:"A Roda do Tempo", autor:"Robert Jordan", genero:"fantasia", isbn:"9781250251480"},
+  {titulo:"O Mago", autor:"Raymond E. Feist", genero:"fantasia", isbn:"9780007517969"},
+  {titulo:"A Canção de Aquiles", autor:"Madeline Miller", genero:"fantasia", isbn:"9780062060624"},
+  {titulo:"Circe", autor:"Madeline Miller", genero:"fantasia", isbn:"9780316556346"},
+  {titulo:"Terramar", autor:"Ursula K. Le Guin", genero:"fantasia", isbn:"9780547773742"},
+  {titulo:"Jonathan Strange & Mr Norrell", autor:"Susanna Clarke", genero:"fantasia", isbn:"9780765356154"},
+  {titulo:"O Príncipe Cruel", autor:"Holly Black", genero:"fantasia", isbn:"9780316310276"},
+  {titulo:"A Sombra do Vento", autor:"Carlos Ruiz Zafón", genero:"fantasia", isbn:"9780143034906"},
+
+  // -----------------------
+  // TERROR (10)
+  // -----------------------
+  {titulo:"It: A Coisa", autor:"Stephen King", genero:"terror", isbn:"9781501142970"},
+  {titulo:"O Iluminado", autor:"Stephen King", genero:"terror", isbn:"9780307743657"},
+  {titulo:"Coraline", autor:"Neil Gaiman", genero:"terror", isbn:"9780380807345"},
+  {titulo:"Drácula", autor:"Bram Stoker", genero:"terror", isbn:"9780486411095"},
+  {titulo:"Frankenstein", autor:"Mary Shelley", genero:"terror", isbn:"9780486282114"},
+  {titulo:"O Chamado de Cthulhu", autor:"H.P. Lovecraft", genero:"terror", isbn:"9781099782368"},
+  {titulo:"O Exorcista", autor:"William Peter Blatty", genero:"terror", isbn:"9780061007224"},
+  {titulo:"A Coisa", autor:"Stephen King", genero:"terror", isbn:"9781501142970"},
+  {titulo:"Bird Box", autor:"Josh Malerman", genero:"terror", isbn:"9780062259653"},
+  {titulo:"Misery", autor:"Stephen King", genero:"terror", isbn:"9781501143106"},
+
+  // -----------------------
+  // ROMANCE (15)
+  // -----------------------
+  {titulo:"O Morro dos Ventos Uivantes", autor:"Emily Brontë", genero:"romance", isbn:"9780141439556"},
+  {titulo:"Orgulho e Preconceito", autor:"Jane Austen", genero:"romance", isbn:"9780141439518"},
+  {titulo:"Razão e Sensibilidade", autor:"Jane Austen", genero:"romance", isbn:"9780141439662"},
+  {titulo:"Jane Eyre", autor:"Charlotte Brontë", genero:"romance", isbn:"9780142437209"},
+  {titulo:"Anna Kariênina", autor:"Liev Tolstói", genero:"romance", isbn:"9780143035008"},
+  {titulo:"Dom Casmurro", autor:"Machado de Assis", genero:"romance", isbn:"9788535920681"},
+  {titulo:"Madame Bovary", autor:"Gustave Flaubert", genero:"romance", isbn:"9780199535651"},
+  {titulo:"E o Vento Levou", autor:"Margaret Mitchell", genero:"romance", isbn:"9781416548898"},
+  {titulo:"O Sol é Para Todos", autor:"Harper Lee", genero:"romance", isbn:"9780060935467"},
+  {titulo:"O Amante", autor:"Marguerite Duras", genero:"romance", isbn:"9780375720376"},
+  {titulo:"Eleanor & Park", autor:"Rainbow Rowell", genero:"romance", isbn:"9781250012579"},
+  {titulo:"A Culpa é das Estrelas", autor:"John Green", genero:"romance", isbn:"9780142424179"},
+  {titulo:"Um Dia", autor:"David Nicholls", genero:"romance", isbn:"9780307946713"},
+  {titulo:"Como Eu Era Antes de Você", autor:"Jojo Moyes", genero:"romance", isbn:"9780143109167"},
+  {titulo:"Quatro Vidas de um Cachorro", autor:"W. Bruce Cameron", genero:"romance", isbn:"9780765330550"},
+
+  // -----------------------
+  // DRAMA (15)
+  // -----------------------
+  {titulo:"A Hora da Estrela", autor:"Clarice Lispector", genero:"drama", isbn:"9788532529788"},
+  {titulo:"Torto Arado", autor:"Itamar Vieira Junior", genero:"drama", isbn:"9786556921359"},
+  {titulo:"A Menina que Roubava Livros", autor:"Markus Zusak", genero:"drama", isbn:"9780375842207"},
+  {titulo:"Mil Sóis Esplêndidos", autor:"Khaled Hosseini", genero:"drama", isbn:"9781594483073"},
+  {titulo:"O Velho e o Mar", autor:"Ernest Hemingway", genero:"drama", isbn:"9780684801223"},
+  {titulo:"As Três Marias", autor:"Rachel de Queiroz", genero:"drama", isbn:"9788535920643"},
+  {titulo:"Vidas Secas", autor:"Graciliano Ramos", genero:"drama", isbn:"9788520921037"},
+  {titulo:"Angústia", autor:"Graciliano Ramos", genero:"drama", isbn:"9788520921129"},
+  {titulo:"O Filho Eterno", autor:"Cristovão Tezza", genero:"drama", isbn:"9788574063667"},
+  {titulo:"O Arroz de Palma", autor:"Francisco Azevedo", genero:"drama", isbn:"9788501082075"},
+  {titulo:"Capitães da Areia", autor:"Jorge Amado", genero:"drama", isbn:"9788520932330"},
+  {titulo:"O Encontro Marcado", autor:"Fernando Sabino", genero:"drama", isbn:"9788525404429"},
+  {titulo:"O Beijo da Mulher-Aranha", autor:"Manuel Puig", genero:"drama", isbn:"9788535909747"},
+  {titulo:"Lavoura Arcaica", autor:"Raduan Nassar", genero:"drama", isbn:"9788535913232"},
+  {titulo:"A Redoma de Vidro", autor:"Sylvia Plath", genero:"drama", isbn:"9780061148514"},
+
+  // -----------------------
+  // CLÁSSICOS (25)
+  // -----------------------
+  {titulo:"Grande Sertão: Veredas", autor:"Guimarães Rosa", genero:"classicos", isbn:"9788520921358"},
+  {titulo:"Sagarana", autor:"Guimarães Rosa", genero:"classicos", isbn:"9788520920740"},
+  {titulo:"Crime e Castigo", autor:"Fiódor Dostoiévski", genero:"classicos", isbn:"9780140449136"},
+  {titulo:"Os Irmãos Karamázov", autor:"Fiódor Dostoiévski", genero:"classicos", isbn:"9780374528379"},
+  {titulo:"O Idiota", autor:"Fiódor Dostoiévski", genero:"classicos", isbn:"9780140447920"},
+  {titulo:"Memórias Póstumas de Brás Cubas", autor:"Machado de Assis", genero:"classicos", isbn:"9788535920490"},
+  {titulo:"Quincas Borba", autor:"Machado de Assis", genero:"classicos", isbn:"9788535920636"},
+  {titulo:"Esaú e Jacó", autor:"Machado de Assis", genero:"classicos", isbn:"9788535920674"},
+  {titulo:"O Alienista", autor:"Machado de Assis", genero:"classicos", isbn:"9788535920667"},
+  {titulo:"O Cortiço", autor:"Aluísio Azevedo", genero:"classicos", isbn:"9788520920247"},
+  {titulo:"Lucíola", autor:"José de Alencar", genero:"classicos", isbn:"9788535920551"},
+  {titulo:"Iracema", autor:"José de Alencar", genero:"classicos", isbn:"9788535920575"},
+  {titulo:"O Guarani", autor:"José de Alencar", genero:"classicos", isbn:"9788535920582"},
+  {titulo:"Macunaíma", autor:"Mário de Andrade", genero:"classicos", isbn:"9788526018120"},
+  {titulo:"Carta ao Pai", autor:"Franz Kafka", genero:"classicos", isbn:"9780805212662"},
+  {titulo:"A Metamorfose", autor:"Franz Kafka", genero:"classicos", isbn:"9780553213690"},
+  {titulo:"O Processo", autor:"Franz Kafka", genero:"classicos", isbn:"9780805210408"},
+  {titulo:"O Castelo", autor:"Franz Kafka", genero:"classicos", isbn:"9780805211061"},
+  {titulo:"A Peste", autor:"Albert Camus", genero:"classicos", isbn:"9780679720218"},
+  {titulo:"O Estrangeiro", autor:"Albert Camus", genero:"classicos", isbn:"9780679720201"},
+  {titulo:"Os Miseráveis", autor:"Victor Hugo", genero:"classicos", isbn:"9780451419439"},
+  {titulo:"O Conde de Monte Cristo", autor:"Alexandre Dumas", genero:"classicos", isbn:"9780140449266"},
+  {titulo:"A Ilíada", autor:"Homero", genero:"classicos", isbn:"9780140275360"},
+  {titulo:"A Odisseia", autor:"Homero", genero:"classicos", isbn:"9780140268867"},
+  {titulo:"O Retrato de Dorian Gray", autor:"Oscar Wilde", genero:"classicos", isbn:"9780141439570"},
+
+  // -----------------------
+  // FILOSOFIA (10)
+  // -----------------------
+  {titulo:"Assim Falou Zaratustra", autor:"Nietzsche", genero:"filosofia", isbn:"9780140441185"},
+  {titulo:"A República", autor:"Platão", genero:"filosofia", isbn:"9780140455113"},
+  {titulo:"Ética a Nicômaco", autor:"Aristóteles", genero:"filosofia", isbn:"9780140449495"},
+  {titulo:"Meditações", autor:"Marco Aurélio", genero:"filosofia", isbn:"9780486298238"},
+  {titulo:"O Mundo de Sofia", autor:"Jostein Gaarder", genero:"filosofia", isbn:"9780374530716"},
+  {titulo:"A Náusea", autor:"Jean-Paul Sartre", genero:"filosofia", isbn:"9780679737551"},
+  {titulo:"O Príncipe", autor:"Maquiavel", genero:"filosofia", isbn:"9780140449150"},
+  {titulo:"A Paixão Segundo G.H.", autor:"Clarice Lispector", genero:"filosofia", isbn:"9788535920315"},
+  {titulo:"Demian", autor:"Hermann Hesse", genero:"filosofia", isbn:"9780440493710"},
+  {titulo:"Sidarta", autor:"Hermann Hesse", genero:"filosofia", isbn:"9780142437186"},
+
+  // -----------------------
+  // MISTÉRIO (10)
+  // -----------------------
+  {titulo:"Sherlock Holmes", autor:"Arthur Conan Doyle", genero:"misterio", isbn:"9780141034324"},
+  {titulo:"O Código Da Vinci", autor:"Dan Brown", genero:"misterio", isbn:"9780307474278"},
+  {titulo:"Assassinato no Expresso do Oriente", autor:"Agatha Christie", genero:"misterio", isbn:"9780062693662"},
+  {titulo:"Garota Exemplar", autor:"Gillian Flynn", genero:"misterio", isbn:"9780307588371"},
+  {titulo:"A Paciente Silenciosa", autor:"Alex Michaelides", genero:"misterio", isbn:"9781250301697"},
+  {titulo:"Os Homens que Não Amavam as Mulheres", autor:"Stieg Larsson", genero:"misterio", isbn:"9780307454546"},
+  {titulo:"O Nome da Rosa", autor:"Umberto Eco", genero:"misterio", isbn:"9780151446476"},
+  {titulo:"O Pêndulo de Foucault", autor:"Umberto Eco", genero:"misterio", isbn:"9780156032971"},
+  {titulo:"E Não Sobrou Nenhum", autor:"Agatha Christie", genero:"misterio", isbn:"9780062073488"},
+  {titulo:"O Silêncio dos Inocentes", autor:"Thomas Harris", genero:"misterio", isbn:"9780312924583"},
+
+  // -----------------------
+  // NÃO FICÇÃO (15)
+  // -----------------------
+  {titulo:"Sapiens", autor:"Yuval Noah Harari", genero:"nao_ficcao", isbn:"9780062316110"},
+  {titulo:"Homo Deus", autor:"Yuval Noah Harari", genero:"nao_ficcao", isbn:"9780062464316"},
+  {titulo:"Steve Jobs", autor:"Walter Isaacson", genero:"nao_ficcao", isbn:"9781451648546"},
+  {titulo:"Long Walk to Freedom", autor:"Nelson Mandela", genero:"nao_ficcao", isbn:"9780316548182"},
+  {titulo:"O Diário de Anne Frank", autor:"Anne Frank", genero:"nao_ficcao", isbn:"9780553296983"},
+  {titulo:"Medo e Delírio em Las Vegas", autor:"Hunter S. Thompson", genero:"nao_ficcao", isbn:"9780679785897"},
+  {titulo:"As Palavras", autor:"Jean-Paul Sartre", genero:"nao_ficcao", isbn:"9780679734789"},
+  {titulo:"Paris é uma Festa", autor:"Ernest Hemingway", genero:"nao_ficcao", isbn:"9780099909408"},
+  {titulo:"A Arte da Guerra", autor:"Sun Tzu", genero:"nao_ficcao", isbn:"9781599869774"},
+  {titulo:"Educated", autor:"Tara Westover", genero:"nao_ficcao", isbn:"9780399590504"},
+  {titulo:"O Gene", autor:"Siddhartha Mukherjee", genero:"nao_ficcao", isbn:"9781476733524"},
+  {titulo:"Cosmos", autor:"Carl Sagan", genero:"nao_ficcao", isbn:"9780345539434"},
+  {titulo:"Breves Respostas para Grandes Questões", autor:"Stephen Hawking", genero:"nao_ficcao", isbn:"9781984823488"},
+  {titulo:"O Andar do Bêbado", autor:"Leonard Mlodinow", genero:"nao_ficcao", isbn:"9780307275172"},
+  {titulo:"Rápido e Devagar", autor:"Daniel Kahneman", genero:"nao_ficcao", isbn:"9780143125564"}
+
+];
+
+// CAPAS
+function capa(isbn) {
+  return `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`;
+}
+
+// RENDERIZAR LISTA
+function render(lista) {
+  const div = document.getElementById("listaLivros");
+  div.innerHTML = "";
+
+  lista.forEach(l => {
+    div.innerHTML += `
+      <div class="book-card">
+        <img src="${capa(l.isbn)}">
+        <div class="book-title">${l.titulo}</div>
+        <div class="book-author">${l.autor}</div>
+
+        <a class="btn lendo"    onclick="addEstante('${l.titulo}','${capa(l.isbn)}','lendo')">📘 Lendo</a>
+        <a class="btn lido"     onclick="addEstante('${l.titulo}','${capa(l.isbn)}','lido')">📗 Lidos</a>
+        <a class="btn proximos" onclick="addEstante('${l.titulo}','${capa(l.isbn)}','proximos')">📙 Próximos</a>
+      </div>
+    `;
+  });
+}
+
+// BUSCA
+function buscar() {
+  const texto = document.getElementById("busca").value.toLowerCase();
+  const resultado = livros.filter(l =>
+    l.titulo.toLowerCase().includes(texto) ||
+    l.autor.toLowerCase().includes(texto)
+  );
+  render(resultado);
+}
+
+// FILTRO
+function filtrar() {
+  const genero = document.getElementById("filtro").value;
+
+  if (genero === "todos") return render(livros);
+
+  const resultado = livros.filter(l => l.genero === genero);
+  render(resultado);
+}
+
+// ESTANTE
+function addEstante(titulo, capa, status) {
+  let lista = JSON.parse(localStorage.getItem("estante_status")) || [];
+
+  let existe = lista.find(l => l.titulo === titulo);
+
+  if (existe) existe.status = status;
+  else lista.push({ titulo, capa, status });
+
+  localStorage.setItem("estante_status", JSON.stringify(lista));
+  alert(`📚 "${titulo}" foi adicionado em ${status.toUpperCase()}!`);
+}
+
+// Inicial
+render(livros);
+
+</script>
+
+</body>
+</html>

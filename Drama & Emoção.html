@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Drama & Emoção — Biblioteca Conecta</title>
+  <style>
+    :root{
+      --primary: #4b2e83;
+      --bg: #f7f7fb;
+      --card: #ffffff;
+      --muted: #6b6b7a;
+      --radius: 8px;
+      --gap: 10px;
+      --maxw: 1100px;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:var(--bg);
+      color:#222;
+      line-height:1.45;
+    }
+
+    header{
+      background:var(--primary);
+      color:#fff;
+      padding:12px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .brand { font-weight:700; font-size:1.05rem }
+    nav a{
+      color:#fff;
+      text-decoration:none;
+      margin-left:12px;
+      font-weight:600;
+      font-size:0.92rem;
+    }
+
+    main{
+      max-width:var(--maxw);
+      margin:18px auto;
+      padding:0 16px 36px;
+    }
+
+    .hero{
+      background: linear-gradient(90deg, rgba(75,46,131,0.08), rgba(75,46,131,0.03));
+      border-radius:var(--radius);
+      padding:14px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .hero h1{ margin:0; color:var(--primary); font-size:1.4rem }
+    .hero p{ margin:4px 0 0 0; color:var(--muted); font-size:0.95rem }
+
+    .top10{
+      background:var(--card);
+      margin-top:12px;
+      padding:12px;
+      border-radius:8px;
+      box-shadow:0 6px 16px rgba(20,20,30,0.03);
+      border-left:6px solid #ff8a7a;
+    }
+    .top10 h2{ margin:0; color:var(--primary) }
+    .top10 ol{ margin:10px 0 0 18px; color:#222; padding-right:8px; }
+    .top10 li{ margin:6px 0; font-size:0.95rem; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: var(--gap);
+      margin-top:12px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:8px;
+      padding:12px;
+      box-shadow:0 6px 16px rgba(20,20,30,0.04);
+      border-left:4px solid var(--primary);
+    }
+    .card h3{ margin:0 0 8px 0; font-size:1rem; color:var(--primary) }
+    .card p{ margin:0; color:var(--muted); font-size:0.95rem }
+
+    .adaptacoes{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:6px 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .adapt{
+      min-width:140px;
+      background:var(--card);
+      padding:10px;
+      border-radius:8px;
+      box-shadow:0 6px 14px rgba(20,20,30,0.04);
+      text-align:center;
+      border-left:4px solid #ffd36b;
+      flex:0 0 auto;
+      font-size:0.92rem;
+    }
+    .adapt strong{ display:block; color:#222 }
+    .adapt small{ display:block; color:var(--muted); margin-top:6px; font-size:0.82rem }
+
+    .clube{
+      margin-top:12px;
+      background:var(--card);
+      padding:12px;
+      border-radius:8px;
+      box-shadow:0 6px 14px rgba(20,20,30,0.04);
+      border-left:4px solid #6b4bb0;
+    }
+    .clube h3{ margin:0 0 8px 0; color:#6b4bb0; }
+
+    .list-plain { margin-top:8px; padding:0; list-style:none; }
+    .list-plain li{ background:var(--card); padding:10px; border-radius:8px; margin-bottom:8px; box-shadow:0 4px 12px rgba(20,20,30,0.03); color:var(--muted); font-size:0.93rem; }
+
+    .quotes{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    blockquote{
+      margin:0;
+      padding:10px;
+      background:#fff;
+      border-radius:8px;
+      border-left:4px solid #ffd3e0;
+      color:var(--muted);
+      font-style:italic;
+    }
+    blockquote footer{ display:block; margin-top:8px; font-weight:700; color:#333; font-style:normal; font-size:0.95rem; }
+
+    footer{
+      margin-top:20px;
+      padding:14px;
+      text-align:center;
+      color:#fff;
+      background:var(--primary);
+      font-size:0.95rem;
+    }
+
+    /* responsivo */
+    @media (max-width:980px){
+      .grid{ grid-template-columns:1fr; }
+      .quotes{ grid-template-columns:1fr; }
+      .hero{ flex-direction:column; align-items:flex-start; }
+    }
+    @media (max-width:480px){
+      nav a{ display:none; }
+      .hero h1{ font-size:1.15rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">Biblioteca Conecta</div>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="Acervo.html">Acervo</a>
+      <a href="batepapo.html">Bate-Papo</a>
+      <a href="salas.html">Salas</a>
+      <a href="estantes.html">Estantes</a>
+      <a href="grupos.html">Grupos</a>
+      <a href="login.html" style="color:#ffd700;">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="titulo-drama">
+      <div>
+        <h1 id="titulo-drama">Drama &amp; Emoção</h1>
+        <p>Histórias que tocam o coração: dramas humanos, relações intensas e emoções à flor da pele.</p>
+      </div>
+      <div style="text-align:right; color:var(--muted)">
+        <small>Sinta, chore e se emocione com cada página.</small>
+      </div>
+    </section>
+
+    <!-- TOP 10 -->
+    <section class="top10" aria-labelledby="top10-title">
+      <h2 id="top10-title">Top 10 Dramáticos</h2>
+      <ol>
+        <li>Os Miseráveis — Victor Hugo</li>
+        <li>O Morro dos Ventos Uivantes — Emily Brontë</li>
+        <li>Anna Karenina — L. Tolstói</li>
+        <li>Como Eu Era Antes de Você — Jojo Moyes</li>
+        <li>Um Amor para Recordar — Nicholas Sparks</li>
+        <li>A Menina que Roubava Livros — Markus Zusak</li>
+        <li>O Amante — Marguerite Duras</li>
+        <li>Me Chame Pelo Seu Nome — André Aciman</li>
+        <li>As Vantagens de Ser Invisível — Stephen Chbosky</li>
+        <li>Ensaio Sobre a Cegueira — José Saramago</li>
+      </ol>
+    </section>
+
+    <!-- GRID: categorias + adaptações -->
+    <section class="grid" aria-label="conteúdos">
+      <!-- CATEGORIAS -->
+      <article class="card">
+        <h3>Categorias de Drama</h3>
+        <p style="margin-top:6px; font-weight:600;">Explore por tema</p>
+        <ul style="margin:8px 0 0 18px; color:var(--muted)">
+          <li>Drama Familiar</li>
+          <li>Drama Romântico</li>
+          <li>Drama Social</li>
+          <li>Tragédias</li>
+          <li>Memórias e biografias emocionantes</li>
+        </ul>
+      </article>
+
+      <!-- ADAPTAÇÕES -->
+      <article class="card">
+        <h3>Livros que viraram filmes/séries</h3>
+        <div class="adaptacoes" role="list">
+          <div class="adapt" role="listitem">
+            <strong>Como Eu Era Antes de Você</strong>
+            <small>Filme 2016</small>
+          </div>
+          <div class="adapt" role="listitem">
+            <strong>A Menina que Roubava Livros</strong>
+            <small>Filme 2013</small>
+          </div>
+          <div class="adapt" role="listitem">
+            <strong>Me Chame Pelo Seu Nome</strong>
+            <small>Filme 2017</small>
+          </div>
+          <div class="adapt" role="listitem">
+            <strong>Os Miseráveis</strong>
+            <small>Várias adaptações</small>
+          </div>
+          <div class="adapt" role="listitem">
+            <strong>O Amante</strong>
+            <small>Filme 1992</small>
+          </div>
+        </div>
+        <p style="margin-top:8px; color:var(--muted)">Clique no livro no acervo para ver sinopse completa e detalhes.</p>
+      </article>
+    </section>
+
+    <!-- CLUBE (abaixo) -->
+    <section class="clube" aria-labelledby="club-title">
+      <h3 id="club-title">Clube de Leitura — Drama &amp; Emoção</h3>
+
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:220px;">
+          <p style="font-weight:600; margin-bottom:6px;">Próximos encontros</p>
+          <ul class="list-plain">
+            <li>08/02/2026 — Discussão: "A Menina que Roubava Livros"</li>
+            <li>22/02/2026 — Debate: Dramaturgia em romances contemporâneos</li>
+          </ul>
+        </div>
+
+        <div style="width:260px;">
+          <p style="font-weight:600; margin-bottom:6px;">Resenhas rápidas</p>
+          <ul class="list-plain">
+            <li>“Uma história que derruba defesas.” — Marina</li>
+            <li>“Personagens reais, emoção verdadeira.” — Pedro</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section class="quotes" aria-labelledby="quotes-title">
+      <h2 id="quotes-title" style="grid-column:1 / -1; color:var(--primary); margin:0 0 6px 0; font-size:1.05rem">Frases Marcantes</h2>
+
+      <blockquote>
+        “Algumas dores ensinam mais do que qualquer alegria.”
+        <footer>— Autor desconhecido</footer>
+      </blockquote>
+
+      <blockquote>
+        “Ler é também sentir o que outro sentiu — e isso transforma.” 
+        <footer>— Trecho inspirador</footer>
+      </blockquote>
+    </section>
+
+    <!-- RECOMENDAÇÃO E COMO ESCOLHER -->
+    <section style="margin-top:12px;">
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div class="card" style="flex:1; min-width:220px;">
+          <h3>Recomendação da semana</h3>
+          <p style="margin-top:8px; color:var(--muted)">“A Menina que Roubava Livros” — emocionante e poético.</p>
+        </div>
+
+        <div class="card" style="width:260px;">
+          <h3>Como escolher um drama</h3>
+          <p style="margin-top:8px; color:var(--muted)">Busque sinopses que descrevam relações humanas profundas e leia trechos para sentir o tom.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTÃO PARA ACERVO -->
+    <section style="margin-top:12px;">
+      <div class="card" style="text-align:center;">
+        <p style="margin:6px 0 10px 0; font-weight:700; color:var(--primary)">Quer explorar mais dramas?</p>
+        <a href="Acervo.html" style="background:var(--primary); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-weight:700;">
+          Ir para o Acervo
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Desenvolvido por <strong>Enzo Iwazaki</strong> — © 2025 Biblioteca Conecta
+  </footer>
+
+</body>
+</html>

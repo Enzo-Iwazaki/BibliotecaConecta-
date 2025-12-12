@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Salas | Biblioteca Conecta</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(#faf7ff, #ece4ff);
+    }
+
+    header {
+      background: #4b2e83;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #d9c6ff;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h2 {
+      color: #4b2e83;
+      margin-bottom: 15px;
+    }
+
+    .card, .sala {
+      /* reset de sombra de texto global, se tiver */
+      text-shadow: none;
+    }
+
+    .salas-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+
+    .sala {
+      background: #f4edff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
+      color: white; /* assume textos em branco por causa da imagem de fundo */
+    }
+
+    .sala:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    }
+
+    .sala-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    .sala-nome {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .sala button {
+      background: #4b2e83;
+      border: none;
+      color: white;
+      padding: 10px;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .sala button:hover {
+      background: #6d45c5;
+    }
+
+    /* Classe para sombra de texto visível sobre imagens */
+    .shadow {
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.85);
+    }
+
+    /* Input e select de busca/filtro */
+    #busca, #filtro {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #c4aaff;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Salas Temáticas</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="batepapo.html">Bate-Papo</a>
+    <a href="salas.html">Salas</a>
+    <a href="estantes.html">Estantes</a>
+    <a href="grupos.html">Grupos</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Escolha uma Sala</h2>
+
+  <!-- BARRA DE BUSCA -->
+  <input type="text" id="busca" placeholder="🔍 Buscar sala..." onkeyup="buscarSala()">
+
+  <!-- FILTRO DE SALAS -->
+  <select id="filtro" onchange="filtrarSalas()">
+    <option value="todas">Mostrar Todas</option>
+    <option value="Geral">Geral</option>
+    <option value="Romance">Romance</option>
+    <option value="Terror">Terror</option>
+    <option value="Fantasia">Fantasia</option>
+    <option value="Mistério">Mistério</option>
+    <option value="Ficção Científica">Ficção Científica</option>
+    <option value="Drama">Drama</option>
+  </select>
+
+  <p>Clique em uma sala para entrar no bate-papo. Veja livros recentes, curiosidades e quantos estão online!</p>
+
+  <div class="salas-grid">
+
+    <!-- SALA GERAL -->
+    <div class="sala" onclick="entrarSala('Geral')" style="background-image:url('https://images.unsplash.com/photo-1528747045269-390fe33c19f2'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">💬</div>
+      <div class="sala-nome shadow">Geral</div>
+      <p class="shadow" style="font-size:0.9rem;">Tudo sobre o mundo literário!</p>
+      <p class="shadow"><b>📊 42 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>O Horizonte Azul (2024)</li>
+        <li>Diários Urbanos (2023)</li>
+        <li>Entre Mundos (2023)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">O Brasil registra mais de 60 mil novos livros por ano!</p>
+      <button>Entrar</button>
+    </div>
+
+    <!-- SALA ROMANCE -->
+    <div class="sala" onclick="entrarSala('Romance')" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">💘</div>
+      <div class="sala-nome shadow">Romance</div>
+      <p class="shadow" style="font-size:0.9rem;">Histórias apaixonantes e dramáticas.</p>
+      <p class="shadow"><b>📊 18 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>Amor Além do Tempo (2024)</li>
+        <li>Café com Destino (2023)</li>
+        <li>Cartas de Inverno (2024)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">Romances são o gênero mais vendido no mundo.</p>
+      <button>Entrar</button>
+    </div>
+
+    <!-- SALA TERROR -->
+    <div class="sala" onclick="entrarSala('Terror')" style="background-image:url('https://images.unsplash.com/photo-1502082553048-f009c37129b9'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">👻</div>
+      <div class="sala-nome shadow">Terror</div>
+      <p class="shadow" style="font-size:0.9rem;">Para quem gosta de medo de verdade!</p>
+      <p class="shadow"><b>📊 27 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>A Sombra do Quarto 7 (2024)</li>
+        <li>Não Abra a Porta (2023)</li>
+        <li>Ecos da Madrugada (2024)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">O primeiro livro de terror moderno foi "Frankenstein" (1818).</p>
+      <button>Entrar</button>
+    </div>
+
+    <!-- SALA FANTASIA -->
+    <div class="sala" onclick="entrarSala('Fantasia')" style="background-image:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">🧙</div>
+      <div class="sala-nome shadow">Fantasia</div>
+      <p class="shadow" style="font-size:0.9rem;">Magos, criaturas e mundos místicos!</p>
+      <p class="shadow"><b>📊 33 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>Reino de Névoa (2024)</li>
+        <li>A Lança Dourada (2023)</li>
+        <li>O Último Guardião (2024)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">O gênero fantasia explodiu após O Senhor dos Anéis.</p>
+      <button>Entrar</button>
+    </div>
+
+    <!-- SALA MISTÉRIO -->
+    <div class="sala" onclick="entrarSala('Mistério')" style="background-image:url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">🕵️</div>
+      <div class="sala-nome shadow">Mistério</div>
+      <p class="shadow" style="font-size:0.9rem;">Casos, pistas e investigações!</p>
+      <p class="shadow"><b>📊 14 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>O Caso da Chave Negra (2024)</li>
+        <li>Sete Suspeitos (2023)</li>
+        <li>Vermelho na Névoa (2024)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">Sherlock Holmes é o detetive mais famoso do mundo.</p>
+      <button>Entrar</button>
+    </div>
+
+    <!-- SALA FICÇÃO CIENTÍFICA -->
+    <div class="sala" onclick="entrarSala('Ficção Científica')" style="background-image:url('https://images.unsplash.com/photo-1447433819943-74a20887a81e'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">🚀</div>
+      <div class="sala-nome shadow">Ficção Científica</div>
+      <p class="shadow" style="font-size:0.9rem;">Tecnologia, naves e futuros distantes.</p>
+      <p class="shadow"><b>📊 29 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>Nebulosa Vermelha (2024)</li>
+        <li>Codex Galáctico (2023)</li>
+        <li>Órbitas de Aço (2024)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">O termo "robô" foi usado pela primeira vez em 1920.</p>
+      <button>Entrar</button>
+    </div>
+
+    <!-- SALA DRAMA -->
+    <div class="sala" onclick="entrarSala('Drama')" style="background-image:url('https://images.unsplash.com/photo-1497032628192-86f99bcd76bc'); background-size:cover; background-position:center; padding-top:30px;">
+      <div class="sala-icon shadow">😢</div>
+      <div class="sala-nome shadow">Drama</div>
+      <p class="shadow" style="font-size:0.9rem;">Histórias emocionantes e profundas.</p>
+      <p class="shadow"><b>📊 21 usuários online</b></p>
+      <h4 class="shadow">📚 Lançamentos:</h4>
+      <ul class="shadow" style="text-align:left; font-size:0.9rem; padding-left:18px;">
+        <li>As Últimas 24 Horas (2024)</li>
+        <li>Vidas Partidas (2023)</li>
+        <li>Diário de Abril (2024)</li>
+      </ul>
+      <h4 class="shadow">✨ Curiosidade:</h4>
+      <p class="shadow" style="font-size:0.8rem;">Drama é um dos gêneros mais antigos da literatura.</p>
+      <button>Entrar</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function entrarSala(nome){
+    window.location.href = "batepapo.html?sala=" + encodeURIComponent(nome);
+  }
+
+  function buscarSala(){
+    let texto = document.getElementById('busca').value.toLowerCase();
+    let salas = document.getElementsByClassName('sala');
+
+    for (let s of salas){
+      let nome = s.querySelector('.sala-nome').innerText.toLowerCase();
+      s.style.display = nome.includes(texto) ? 'block' : 'none';
+    }
+  }
+
+  function filtrarSalas(){
+    let filtro = document.getElementById('filtro').value;
+    let salas = document.getElementsByClassName('sala');
+
+    for (let s of salas){
+      let nome = s.querySelector('.sala-nome').innerText;
+      s.style.display = (filtro === 'todas' || filtro === nome) ? 'block' : 'none';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    let salas = document.querySelectorAll('.sala');
+    salas.forEach((s, i) => {
+      s.style.opacity = 0;
+      setTimeout(() => {
+        s.style.transition = '0.6s';
+        s.style.opacity = 1;
+        s.style.transform = 'translateY(0)';
+      }, 150 * i);
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Estante | Biblioteca Conecta</title>
+
+<style>
+  body {
+    margin: 0;
+    background: linear-gradient(#faf7ff, #ece4ff);
+    font-family: Arial, sans-serif;
+  }
+
+  header {
+    background: #4b2e83;
+    padding: 25px;
+    text-align: center;
+    color: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  nav a:hover { color:#d9c6ff; }
+
+  .container {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  h2 {
+    color: #4b2e83;
+  }
+
+  /* Abas */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 25px;
+  }
+
+  .tab {
+    padding: 12px 25px;
+    background: #d8c8ff;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #4b2e83;
+    transition: .3s;
+  }
+
+  .tab:hover { background: #c2aaff; }
+  
+  .tab.active {
+    background: #4b2e83;
+    color: white;
+  }
+
+  /* GRID */
+  .estante-grid {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 22px;
+  }
+
+  .book-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: .3s;
+    text-align: center;
+    padding-bottom: 12px;
+  }
+
+  .book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  }
+
+  .book-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .book-title {
+    font-weight: bold;
+    margin-top: 8px;
+    color: #4b2e83;
+  }
+
+  .category-select {
+    width: 90%;
+    margin-top: 10px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 2px solid #c4aaff;
+  }
+
+  .remove-btn {
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    width: 90%;
+    background: #a02121;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .remove-btn:hover {
+    background: #d13c3c;
+  }
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Minha Estante</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="batepapo.html">Bate-Papo</a>
+    <a href="salas.html">Salas</a>
+    <a href="estantes.html">Estantes</a>
+    <a href="grupos.html">Grupos</a>
+  </nav>
+</header>
+
+<div class="container">
+
+  <h2>Organize seus livros</h2>
+
+  <!-- Abas -->
+  <div class="tabs">
+    <div class="tab active" onclick="trocarAba('lendo')">📘 Lendo</div>
+    <div class="tab" onclick="trocarAba('lido')">📗 Lidos</div>
+    <div class="tab" onclick="trocarAba('proximos')">📙 Próximos</div>
+  </div>
+
+  <div id="listaEstante" class="estante-grid"></div>
+
+</div>
+
+<script>
+
+const capas = {}; // preenchido automaticamente pela ACERVO
+
+// ------------------------------------------------------
+// CARREGAR ESTANTE COM STATUS
+// ------------------------------------------------------
+function carregarEstante(categoria = "lendo") {
+  let lista = JSON.parse(localStorage.getItem("estante_status")) || [];
+  let div = document.getElementById("listaEstante");
+  div.innerHTML = "";
+
+  const filtrados = lista.filter(l => l.status === categoria);
+
+  if (filtrados.length === 0) {
+    div.innerHTML = `<p style="color:#4b2e83; text-align:center; grid-column:1/-1;">Nenhum livro aqui ainda.</p>`;
+    return;
+  }
+
+  filtrados.forEach(item => {
+    div.innerHTML += `
+      <div class="book-card">
+        <img src="${item.capa}">
+        <div class="book-title">${item.titulo}</div>
+
+        <select class="category-select" onchange="alterarStatus('${item.titulo}', this.value)">
+          <option value="lendo" ${item.status==="lendo"?"selected":""}>📘 Lendo</option>
+          <option value="lido" ${item.status==="lido"?"selected":""}>📗 Lido</option>
+          <option value="proximos" ${item.status==="proximos"?"selected":""}>📙 Próximos</option>
+        </select>
+
+        <a class="remove-btn" onclick="removerLivro('${item.titulo}')">Remover</a>
+      </div>
+    `;
+  });
+}
+
+// ------------------------------------------------------
+// ALTERAR STATUS
+// ------------------------------------------------------
+function alterarStatus(titulo, novoStatus) {
+  let lista = JSON.parse(localStorage.getItem("estante_status")) || [];
+  
+  lista = lista.map(item =>
+    item.titulo === titulo ? { ...item, status: novoStatus } : item
+  );
+
+  localStorage.setItem("estante_status", JSON.stringify(lista));
+  carregarEstante(novoStatus);
+}
+
+// ------------------------------------------------------
+// REMOVER
+// ------------------------------------------------------
+function removerLivro(titulo) {
+  let lista = JSON.parse(localStorage.getItem("estante_status")) || [];
+  lista = lista.filter(item => item.titulo !== titulo);
+  localStorage.setItem("estante_status", JSON.stringify(lista));
+  carregarEstante();
+}
+
+// ------------------------------------------------------
+// TROCAR ABA
+// ------------------------------------------------------
+function trocarAba(aba) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  event.target.classList.add("active");
+  carregarEstante(aba);
+}
+
+carregarEstante("lendo");
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca Conecta</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f7f7fb;
+      color: #333;
+    }
+
+    header {
+      background: #4b2e83;
+      color: #fff;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    header h1 { margin: 0; font-size: 1.8rem; }
+
+    nav a {
+      color: #fff;
+      margin-left: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    nav a:hover { opacity: 0.7; }
+
+    .hero {
+      background: url('https://images.pexels.com/photos/1290141/pexels-photo-1290141.jpeg') center/cover no-repeat;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      text-shadow: 1px 1px 6px #000;
+      padding: 20px;
+      font-size: 2.4rem;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #4b2e83;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+      transition: 0.25s;
+      border-left: 6px solid #4b2e83;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.18);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 18px;
+      background: #4b2e83;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .btn:hover { opacity: 0.8; }
+
+    footer {
+      background: #4b2e83;
+      color: #fff;
+      text-align: center;
+      padding: 25px;
+      margin-top: 50px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Biblioteca Conecta</h1>
+    <nav>
+      <a href="Acervo.html" target="_blank">Acervo</a>
+      <a href="batepapo.html" target="_blank">Bate-Papo</a>
+      <a href="salas.html" target="_blank">Salas</a>
+      <a href="estantes.html" target="_blank">Estantes</a>
+      <a href="grupos.html" target="_blank">Grupos</a>
+      <a href="login.html" target="_blank" style="margin-left:25px; color:#ffd700;">Login</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    Bem-vindo ao Biblioteca Conecta — Onde leitores se encontram.
+  </div>
+
+  <!-- LISTA NO TOPO -->
+  <div class="container">
+    <section id="mais-buscados">
+      <h2 class="section-title">Top 5 Livros Mais Buscados</h2>
+      <div class="card">
+        <p>Aqui estão os livros mais procurados pelos leitores nesta semana:</p>
+        <ol style="margin-left: 20px; line-height: 1.8;">
+          <li>1984 — George Orwell</li>
+          <li>Dom Casmurro — Machado de Assis</li>
+          <li>O Pequeno Príncipe — Antoine de Saint-Exupéry</li>
+          <li>Morro dos Ventos Uivantes — Emily Brontë</li>
+          <li>Ensaio Sobre a Cegueira — José Saramago</li>
+        </ol>
+      </div>
+    </section>
+
+     <!-- CURIOSIDADES SOBRE A BIBLIOTECA DE ALEXANDRIA -->
+    <section id="curiosidades-alexandria" style="margin-top:60px;">
+      <h2 class="section-title">Curiosidades — Biblioteca de Alexandria</h2>
+
+<!-- CARD — Resumo da Biblioteca de Alexandria -->
+<div class="card" style="border-left:6px solid #4b2e83; padding:16px; margin:20px 0; border-radius:8px;">
+  <h3 style="margin-top:0; font-size:1.4rem;">A Biblioteca de Alexandria</h3>
+  <p style="margin:0; font-size:1rem; line-height:1.5;">
+    A Biblioteca de Alexandria foi um dos maiores centros de conhecimento do mundo antigo.
+    Fundada no Egito durante o período helenístico, reunia milhares de manuscritos e era um polo
+    de pesquisa, estudo e produção intelectual. Parte do complexo do <em>Mouseion</em>, abrigava
+    filósofos, matemáticos, astrônomos e estudiosos que buscavam compreender e registrar o saber
+    de todas as civilizações conhecidas. Seu legado permanece como símbolo da preservação e
+    da busca universal pelo conhecimento.
+  </p>
+</div>
+
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px;">
+
+        <div class="card">
+          <h3>O Mouseion</h3>
+          <p>A Biblioteca fazia parte do <strong>Mouseion</strong>, um centro dedicado às artes e às ciências onde estudiosos viviam e pesquisavam.</p>
+        </div>
+
+        <div class="card">
+          <h3>Acervo gigantesco</h3>
+          <p>As estimativas apontam entre 40 mil e 400 mil rolos de papiro, reunindo obras de todo o mundo conhecido.</p>
+        </div>
+
+        <div class="card">
+          <h3>Grandes estudiosos</h3>
+          <p>Filósofos, matemáticos e astrônomos trabalharam no local, tornando-a um dos primeiros grandes polos científicos.</p>
+        </div>
+
+        <div class="card">
+          <h3>Destruição gradual</h3>
+          <p>Não houve um único incêndio: a perda ocorreu ao longo de séculos por guerras, abandono e instabilidade política.</p>
+        </div>
+
+        <div class="card">
+          <h3>Renascimento moderno</h3>
+          <p>Em 2002, foi inaugurada a <strong>Bibliotheca Alexandrina</strong>, uma homenagem moderna à antiga biblioteca.</p>
+        </div>
+
+        <div class="card">
+          <h3>Legado vivo</h3>
+          <p>Até hoje, a Biblioteca de Alexandria simboliza o conhecimento universal e a preservação da cultura humana.</p>
+        </div>
+
+      </div>
+    </section>
+
+ <section id="acervo">
+      <h2 class="section-title">Acervo</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1112048/pexels-photo-1112048.jpeg" />
+        Explore milhares de livros organizados por gênero, autores e temas.
+        <br>
+        <a class="btn" href="Acervo.html" target="_blank">Acessar Acervo</a>
+      </div>
+    </section>
+
+    <!-- BATE-PAPO -->
+    <section id="batepapo">
+      <h2 class="section-title">Bate-Papo Literário</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg" />
+        Converse com leitores em tempo real e descubra novas obras.
+        <br>
+        <a class="btn" href="batepapo.html" target="_blank">Entrar no Bate-Papo</a>
+      </div>
+    </section>
+
+    <!-- SALAS -->
+    <section id="salas">
+      <h2 class="section-title">Salas Temáticas</h2>
+      <div class="grid">
+        <div class="card">Terror</div>
+        <div class="card">Romance</div>
+        <div class="card">Fantasia</div>
+        <div class="card">Mistério</div>
+      </div>
+      <br>
+      <a class="btn" href="salas.html" target="_blank">Explorar Salas</a>
+    </section>
+
+    <!-- ESTANTES -->
+    <section id="estantes">
+      <h2 class="section-title">Estantes Virtuais</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg" />
+        Organize seus livros lidos e desejados em prateleiras personalizadas.
+        <br>
+        <a class="btn" href="estantes.html" target="_blank">Minhas Estantes</a>
+      </div>
+    </section>
+
+    <!-- GRUPOS -->
+    <section id="grupos">
+      <h2 class="section-title">Grupos de Discussão</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" />
+        Participe de debates, clubes de leitura e comunidades literárias.
+        <br>
+        <a class="btn" href="grupos.html" target="_blank">Entrar nos Grupos</a>
+      </div>
+    </section>
+
+    <section id="acervo">
+      <h2 class="section-title">Acervo</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1112048/pexels-photo-1112048.jpeg" />
+        Explore milhares de livros organizados por gênero, autores e temas.
+        <br>
+        <a class="btn" href="Acervo.html" target="_blank">Acessar Acervo</a>
+      </div>
+    </section>
+
+    <section id="batepapo">
+      <h2 class="section-title">Bate-Papo Literário</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1181354/pexels-photo-1181354.jpeg" />
+        Converse com leitores em tempo real e descubra novas obras.
+        <br>
+        <a class="btn" href="batepapo.html" target="_blank">Entrar no Bate-Papo</a>
+      </div>
+    </section>
+
+    <section id="salas">
+      <h2 class="section-title">Salas Temáticas</h2>
+      <div class="grid">
+        <div class="card">Terror</div>
+        <div class="card">Romance</div>
+        <div class="card">Fantasia</div>
+        <div class="card">Mistério</div>
+      </div>
+      <br>
+      <a class="btn" href="salas.html" target="_blank">Explorar Salas</a>
+    </section>
+
+    <section id="estantes">
+      <h2 class="section-title">Estantes Virtuais</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/1370295/pexels-photo-1370295.jpeg" />
+        Organize seus livros lidos e desejados em prateleiras personalizadas.
+        <br>
+        <a class="btn" href="estantes.html" target="_blank">Minhas Estantes</a>
+      </div>
+    </section>
+
+    <section id="grupos">
+      <h2 class="section-title">Grupos de Discussão</h2>
+      <div class="card">
+        <img src="https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg" />
+        Participe de debates, clubes de leitura e comunidades literárias.
+        <br>
+        <a class="btn" href="grupos.html" target="_blank">Entrar nos Grupos</a>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    Desenvolvido por <b>Enzo Iwazaki</b><br>
+    © 2025 Biblioteca Conecta — Todos os direitos reservados.
+  </footer>
+</body>
+</html>

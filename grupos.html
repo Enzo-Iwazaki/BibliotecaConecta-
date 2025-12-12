@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Página Extra | Biblioteca Conecta</title>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(#faf7ff,#ece4ff);
+    }
+
+    /* HEADER */
+    header{
+      background:#4b2e83;
+      color:white;
+      text-align:center;
+      padding:25px;
+      box-shadow:0 3px 8px rgba(0,0,0,0.3);
+    }
+
+    nav a{
+      color:white;
+      margin:0 15px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      color:#d9c6ff;
+    }
+
+    /* CONTAINER */
+    .container{
+      max-width:1100px;
+      margin:40px auto;
+      background:white;
+      border-radius:15px;
+      padding:25px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    h2{
+      color:#4b2e83;
+      margin-bottom:15px;
+    }
+
+    /* GRID */
+    .card-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:25px;
+      margin-top:25px;
+    }
+
+    /* CARD */
+    .card{
+      background:white;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 14px rgba(0,0,0,0.18);
+      transition:0.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 6px 20px rgba(0,0,0,0.25);
+    }
+
+    .card img{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+    }
+
+    .card-content{
+      padding:18px;
+    }
+
+    .card-title{
+      font-size:1.25rem;
+      font-weight:bold;
+      color:#4b2e83;
+      margin-bottom:8px;
+    }
+
+    .card-desc{
+      font-size:0.95rem;
+      color:#555;
+      margin-bottom:14px;
+      line-height:1.4rem;
+    }
+
+    .card-btn{
+      display:inline-block;
+      background:#4b2e83;
+      color:white;
+      padding:10px 15px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .card-btn:hover{
+      background:#6d45c5;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Página Especial</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="acervo.html">Acervo</a>
+    <a href="salas.html">Salas</a>
+    <a href="grupos.html">Grupos</a>
+    <a href="estantes.html">Estantes</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h2>Conteúdos Especiais</h2>
+  <p>Explore temas incríveis através dos cartões abaixo.</p>
+
+  <div class="card-grid">
+
+    <!-- CARD 1 — FANTASIA -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Fantasia">
+      <div class="card-content">
+        <div class="card-title">Exploração Fantástica</div>
+        <div class="card-desc">
+          Viagens épicas, reinos mágicos, criaturas lendárias e aventuras inesquecíveis.
+        </div>
+        <a href="Exploração Fantástica.html" class="card-btn">Ver detalhes</a>
+      </div>
+    </div>
+
+    <!-- CARD 2 — MISTÉRIO -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1484665739383-a1069a82d4be" alt="Mistério">
+      <div class="card-content">
+        <div class="card-title">Mistérios Profundos</div>
+        <div class="card-desc">
+          Investigações, pistas escondidas e enigmas que desafiam sua inteligência.
+        </div>
+        <a href="Mistérios Profundos.html" class="card-btn">Ver detalhes</a>
+      </div>
+    </div>
+
+    <!-- CARD 3 — DRAMA -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c" alt="Drama">
+      <div class="card-content">
+        <div class="card-title">Drama & Emoção</div>
+        <div class="card-desc">
+          Histórias intensas que exploram sentimentos humanos e momentos transformadores.
+        </div>
+        <a href="Drama & Emoção.html" class="card-btn">Ver detalhes</a>
+      </div>
+    </div>
+
+    <!-- CARD 4 — ROMANCE -->
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a" alt="Romance">
+      <div class="card-content">
+        <div class="card-title">Romances Inesquecíveis</div>
+        <div class="card-desc">
+          Paixões, encontros inesperados e histórias que aquecem o coração.
+        </div>
+        <a href="Romances Inesquecíveis.html" class="card-btn">Ver detalhes</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

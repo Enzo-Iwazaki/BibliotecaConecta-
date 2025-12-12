@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cadastro — Biblioteca Conecta</title>
+  <style>
+    :root{ --primary:#4b2e83; --bg:#f7f7fb; --card:#fff; --muted:#666; --radius:8px; }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:var(--bg);
+      color:#222;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+      padding:16px;
+    }
+    .card{
+      width:100%;
+      max-width:720px;
+      background:var(--card);
+      border-radius:12px;
+      padding:20px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      border-left:6px solid var(--primary);
+    }
+    h1{ margin:0 0 10px 0; color:var(--primary); font-size:1.4rem; }
+    p.desc{ margin:0 0 18px 0; color:var(--muted); font-size:0.95rem; }
+
+    form{ display:grid; grid-template-columns: repeat(2, 1fr); gap:12px; }
+    label{ display:block; font-size:0.9rem; margin-bottom:6px; color:#333; }
+    input, select {
+      width:100%;
+      padding:10px 12px;
+      border:1px solid #e6e6ee;
+      border-radius:var(--radius);
+      font-size:1rem;
+      background: #fff;
+    }
+    input:focus, select:focus { outline: none; box-shadow: 0 0 0 4px rgba(75,46,131,0.06); border-color:var(--primary); }
+
+    /* make some fields span full width */
+    .full { grid-column: 1 / -1; }
+    .actions { grid-column: 1 / -1; display:flex; gap:12px; align-items:center; justify-content:flex-end; margin-top:6px; }
+
+    .btn {
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .btn.secondary {
+      background:transparent;
+      color:var(--primary);
+      border:1px solid rgba(75,46,131,0.12);
+      font-weight:600;
+    }
+
+    .note { font-size:0.9rem; color:var(--muted); margin-top:8px; }
+
+    @media (max-width:720px){
+      form{ grid-template-columns: 1fr; }
+      .actions{ justify-content:stretch; flex-direction:column-reverse; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <h1>Cadastro — Biblioteca Conecta</h1>
+    <p class="desc">Preencha os dados abaixo. Campos com * são obrigatórios.</p>
+
+    <form action="login.html" method="post" autocomplete="on">
+      <!-- 1 -->
+      <div>
+        <label for="fullname">Nome completo *</label>
+        <input id="fullname" name="fullname" type="text" placeholder="Seu nome completo" required>
+      </div>
+
+      <!-- 2 -->
+      <div>
+        <label for="username">Usuário *</label>
+        <input id="username" name="username" type="text" placeholder="nome_de_usuario" required>
+      </div>
+
+      <!-- 3 -->
+      <div>
+        <label for="email">E-mail *</label>
+        <input id="email" name="email" type="email" placeholder="seu@exemplo.com" required>
+      </div>
+
+      <!-- 4 -->
+      <div>
+        <label for="phone">Telefone</label>
+        <input id="phone" name="phone" type="tel" placeholder="(11) 9XXXX-XXXX">
+      </div>
+
+      <!-- 5 -->
+      <div>
+        <label for="dob">Data de nascimento</label>
+        <input id="dob" name="dob" type="date">
+      </div>
+
+      <!-- 6 -->
+      <div>
+        <label for="gender">Gênero</label>
+        <select id="gender" name="gender">
+          <option value="">-- selecione --</option>
+          <option>Feminino</option>
+          <option>Masculino</option>
+          <option>Não binário</option>
+          <option>Prefiro não dizer</option>
+        </select>
+      </div>
+
+      <!-- 7 (full) -->
+      <div class="full">
+        <label for="address">Endereço</label>
+        <input id="address" name="address" type="text" placeholder="Rua, número, complemento">
+      </div>
+
+      <!-- 8 -->
+      <div>
+        <label for="city">Cidade</label>
+        <input id="city" name="city" type="text" placeholder="Cidade">
+      </div>
+
+      <!-- 9 -->
+      <div>
+        <label for="state">Estado</label>
+        <input id="state" name="state" type="text" placeholder="Estado">
+      </div>
+
+      <!-- 10 -->
+      <div>
+        <label for="zip">CEP</label>
+        <input id="zip" name="zip" type="text" placeholder="00000-000">
+      </div>
+
+      <!-- 11 -->
+      <div>
+        <label for="country">País</label>
+        <input id="country" name="country" type="text" placeholder="Brasil">
+      </div>
+
+      <!-- 12 -->
+      <div>
+        <label for="pwd">Senha *</label>
+        <input id="pwd" name="pwd" type="password" minlength="6" placeholder="Mínimo 6 caracteres" required>
+      </div>
+
+      <!-- 13 -->
+      <div>
+        <label for="pwd2">Confirmar senha *</label>
+        <input id="pwd2" name="pwd2" type="password" placeholder="Repita a senha" required>
+      </div>
+
+      <!-- 14 (favorite genre) full -->
+      <div class="full">
+        <label for="favgenre">Gênero favorito</label>
+        <input id="favgenre" name="favgenre" type="text" placeholder="Ex.: Romance, Fantasia, Mistério">
+      </div>
+
+      <div class="actions">
+        <a class="btn secondary" href="login.html">Voltar</a>
+        <button class="btn" type="submit">Criar conta</button>
+      </div>
+
+      <div class="note">Ao criar a conta você concorda com os termos — esta é uma página estática de exemplo.</div>
+    </form>
+  </div>
+</body>
+</html>
